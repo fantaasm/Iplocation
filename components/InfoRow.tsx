@@ -14,6 +14,7 @@ const InfoRow = (props: Props) => {
 
   if (error) return null
   if (!data) return null
+  if(data.status ==="fail") return null;
 
   return (
     <motion.div

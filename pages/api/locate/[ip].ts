@@ -3,6 +3,7 @@ import type {NextApiRequest, NextApiResponse} from 'next'
 const baseUrl :string = "http://ip-api.com/json/";
 
 export type IpResponse = {
+  status: string,
   city: string,
   country: string,
   countryCode: string,
