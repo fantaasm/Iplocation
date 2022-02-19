@@ -1,7 +1,7 @@
 import * as React from 'react';
+import {memo} from 'react';
 import useSWRImmutable from "swr/immutable";
 import {fetcher} from "../utils/fetcher";
-import {memo} from "react";
 import {motion} from 'framer-motion';
 import Flag from 'react-world-flags';
 
@@ -9,12 +9,11 @@ type Props = {
   ip: string;
 }
 
-const InfoRow = (props: Props) => {
+const InfoRow = (props: Props): JSX.Element => {
   const {data, error} = useSWRImmutable(`/api/locate/${props.ip}`, fetcher)
 
-  if (error) return null
-  if (!data) return null
-  if(data.status ==="fail") return null;
+  if (error || !data) return null
+  if (data.status === "fail") return null;
 
   return (
     <motion.div
@@ -28,7 +27,9 @@ const InfoRow = (props: Props) => {
       </div>
       <div>
         <h3 className={"bg-gray-900 p-2"}>Country</h3>
-        <span className={"p-1 inline-flex gap-1"}>{data.country}<Flag code={data.countryCode} height={20} width={20}/></span>
+        <span className={"p-1 inline-flex gap-1"}>{data.country}<Flag code={data.countryCode}
+                                                                      height={20}
+                                                                      width={20} /></span>
       </div>
       <div>
         <h3 className={"bg-gray-800 p-2"}>Region</h3>
